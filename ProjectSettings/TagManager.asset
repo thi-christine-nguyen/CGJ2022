@@ -7,6 +7,14 @@ TagManager:
   - Tree
   - Sky
   - TimeManager
+  - RainParticles
+  - SnowParticles
+  - WindParticles
+  - SkyBackground
+  - Moon
+  - Sun
+  - MoonLight
+  - MeteoManager
   layers:
   - Default
   - TransparentFX

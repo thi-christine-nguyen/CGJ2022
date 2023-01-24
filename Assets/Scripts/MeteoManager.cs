@@ -7,22 +7,83 @@ using UnityEngine.Rendering.Universal;
 public class MeteoManager : MonoBehaviour
 {
     private int m_currentMeteo;
+    private TimeManager m_timeManager;
     //0 -> sunny, 1 -> rainy, 2 -> snow, 3 -> windy
 
     public GameObject m_RainParticles;
     public GameObject m_SnowParticles;
     public GameObject m_WindParticles;
 
+    private float m_delay;
+    private int m_delayMax = 2;
+
 
     void Start()
     {
+        m_delay = 0;
         m_currentMeteo = 0;
-        SetWindy();
+        SetSunny();
+        m_timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
     }
 
     void Update()
     {
-
+        if (m_timeManager.GetHour() == 16 && m_timeManager.GetMinutes() == 15 && !isRainy())
+        {
+            m_delay += Time.deltaTime;
+            if (m_delay >= m_delayMax)
+            {
+                SetRainy();
+                Debug.Log("rain");
+            }
+            else
+            {
+                m_delay += Time.deltaTime;
+            }
+        }
+        else if (m_timeManager.GetHour() == 5 && m_timeManager.GetMinutes() == 43 && !isSnowy())
+        {
+            m_delay += Time.deltaTime;
+            if (m_delay >= m_delayMax)
+            {
+                SetSnowy();
+                Debug.Log("snow");
+            }
+            else
+            {
+                m_delay += Time.deltaTime;
+            }
+        }
+        else if (m_timeManager.GetHour() == 11 && m_timeManager.GetMinutes() == 27 && !isSunny())
+        {
+            m_delay += Time.deltaTime;
+            if (m_delay >= m_delayMax)
+            {
+                SetSunny();
+                Debug.Log("sun");
+            }
+            else
+            {
+                m_delay += Time.deltaTime;
+            }
+        }
+        else if (m_timeManager.GetHour() == 23 && m_timeManager.GetMinutes() == 7 && !isWindy())
+        {
+            m_delay += Time.deltaTime;
+            if (m_delay >= m_delayMax)
+            {
+                SetWindy();
+                Debug.Log("wind");
+            }
+            else
+            {
+                m_delay += Time.deltaTime;
+            }
+        }
+        else
+        {
+            m_delay = 0;
+        }
     }
 
     void SetMeteo(int meteo)
@@ -30,7 +91,7 @@ public class MeteoManager : MonoBehaviour
         m_currentMeteo = meteo;
     }
 
-    Boolean isRainy()
+    public Boolean isRainy()
     {
         if (m_currentMeteo == 1)
         {
@@ -39,7 +100,7 @@ public class MeteoManager : MonoBehaviour
         return false;
     }
 
-    Boolean isSunny()
+    public Boolean isSunny()
     {
         if (m_currentMeteo == 0)
         {
@@ -48,7 +109,7 @@ public class MeteoManager : MonoBehaviour
         return false;
     }
 
-    Boolean isWindy()
+    public Boolean isWindy()
     {
         if (m_currentMeteo == 3)
         {
@@ -57,7 +118,7 @@ public class MeteoManager : MonoBehaviour
         return false;
     }
 
-    Boolean isFoggy()
+    public Boolean isSnowy()
     {
         if (m_currentMeteo == 2)
         {
@@ -121,19 +182,25 @@ public class MeteoManager : MonoBehaviour
         }
         else
         {
-            if (GameObject.FindGameObjectWithTag(tag) == null && FindInActiveObjectByTag(tag) == null) 
+            if (GameObject.FindGameObjectWithTag(tag) != null || FindInActiveObjectByTag(tag) != null) 
             {
                 if (tag.Equals("WindParticles"))
                 {
-                    Instantiate(m_WindParticles);
+                    GameObject obj = Instantiate(m_WindParticles);
+                    obj.transform.parent = gameObject.transform;
+                    obj.transform.position = transform.position;
                 }
                 else if (tag.Equals("RainParticles"))
                 {
-                    Instantiate(m_RainParticles);
+                    GameObject obj = Instantiate(m_RainParticles);
+                    obj.transform.parent = gameObject.transform;
+                    obj.transform.position = transform.position;
                 }
                 else if (tag.Equals("SnowParticles"))
                 {
-                    Instantiate(m_SnowParticles);
+                    GameObject obj = Instantiate(m_SnowParticles);
+                    obj.transform.parent = gameObject.transform;
+                    obj.transform.position = transform.position;
                 }
             }
         }
