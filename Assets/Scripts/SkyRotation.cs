@@ -15,11 +15,13 @@ public class SkyRotation : MonoBehaviour
     private float m_angularSpeed = 0.2f;
     public float m_rotationRadius = -9f;
 
+    public TimeManager tm;
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        tm = FindObjectOfType<TimeManager>();
     }
 
     // Update is called once per frame
