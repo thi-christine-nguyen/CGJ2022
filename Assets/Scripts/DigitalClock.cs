@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DigitalClock : MonoBehaviour
 {
-    public TimeManager tm;
+    TimeManager tm;
     Text display;
 
     public bool _24HourClock = true;
@@ -13,8 +13,7 @@ public class DigitalClock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(FindObjectsOfType<TimeManager>().Length);
-
+        tm = FindObjectOfType<TimeManager>();
         display = GetComponent<Text>();
     }
 
