@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class treeAnimation : MonoBehaviour
 {
-    private bool isGrowing = true;
-    private bool isAlreadyCollided = false;
+    private MeteoManager meteo;
 
     public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        meteo = GameObject.FindGameObjectWithTag("MeteoManager").GetComponent<MeteoManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGrowing)
+        if (meteo.isRainy())
         {
             anim.SetBool("isGrowing", true);
         }
