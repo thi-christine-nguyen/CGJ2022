@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Tree
   - Sky
-  - TimeManager
+  - Pane
   layers:
   - Default
   - TransparentFX
