@@ -38,6 +38,12 @@ public class randomCreation : MonoBehaviour
 
         foreach (GameObject go in listeGO)
         {
+
+            if (go == null)
+            {
+                listeGO.Remove(go);
+                continue;
+            }
  
             float valueX = go.transform.position.x;
             go.transform.position = new Vector3(valueX + 0.001f, go.transform.position.y, go.transform.position.z);
