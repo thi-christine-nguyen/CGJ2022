@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnalogClock : MonoBehaviour
 {
-    public TimeManager tm;
+    TimeManager tm;
 
     public RectTransform minuteHand;
     public RectTransform hourHand;
