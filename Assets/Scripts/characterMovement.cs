@@ -69,4 +69,17 @@ public class characterBehaviour : MonoBehaviour
             transform.localScale = localScale;
         //}
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Tree")
+        {
+            float valueX = collision.gameObject.transform.position.x;
+            float valueY = collision.gameObject.transform.position.y;
+
+            gameObject.transform.position = new Vector3(valueX, valueY + 1, gameObject.transform.position.z);
+        }
+
+
+    }
 }
