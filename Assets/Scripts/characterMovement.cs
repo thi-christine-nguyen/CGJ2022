@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class characterBehaviour : MonoBehaviour
 {
-
     private float horizontal;
     private float speed = 5f;
     private float jumpingPower = 7f;
-    private bool isFacingRight = true;
+    private bool isFacingRight = false;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    public Rigidbody2D rb;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public Animator anim;
 
     void Update()
     {
@@ -21,14 +21,32 @@ public class characterBehaviour : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            anim.SetBool("isRunning", false);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            anim.SetBool("isRunning", false);
         }
 
-        Flip();
+        if (rb.velocity.x > 0f || rb.velocity.x < 0f)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else if (rb.velocity.x == 0f)
+        {
+            anim.SetBool("isRunning", false);
+        }
+
+        if (horizontal > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontal < 0 && isFacingRight)
+        {
+            Flip();
+        }
     }
 
     private void FixedUpdate()
@@ -43,12 +61,12 @@ public class characterBehaviour : MonoBehaviour
 
     private void Flip()
     {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
+        //if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        //{
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-        }
+        //}
     }
 }
