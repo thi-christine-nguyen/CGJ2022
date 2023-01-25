@@ -15,6 +15,13 @@ TagManager:
   - Sun
   - MoonLight
   - MeteoManager
+  - Pane
+  - water
+  - RainyLogo
+  - SunLogo
+  - SnowLogo
+  - WindLogo
+  - CloudGenerator
   layers:
   - Default
   - TransparentFX

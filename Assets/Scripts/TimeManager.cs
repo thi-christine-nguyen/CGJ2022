@@ -8,6 +8,12 @@ public class TimeManager : MonoBehaviour
     public Slider hour;
     public Slider minute;
 
+    private void Start()
+    {
+        hour.value = 10; 
+        minute.value = 30;
+
+    }
     public float GetHour()
     {
         return hour.value;

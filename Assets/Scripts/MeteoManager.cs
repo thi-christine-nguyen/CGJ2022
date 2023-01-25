@@ -23,7 +23,7 @@ public class MeteoManager : MonoBehaviour
         m_timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
         m_delay = 0;
         m_currentMeteo = 0;
-        SetSunny();
+        SetSunny(false);
     }
 
     void Update()
@@ -57,7 +57,7 @@ public class MeteoManager : MonoBehaviour
             m_delay += Time.deltaTime;
             if (m_delay >= m_delayMax)
             {
-                SetSunny();
+                SetSunny(true);
             }
             else
             {
@@ -123,15 +123,22 @@ public class MeteoManager : MonoBehaviour
         return false;
     }
 
-    void SetSunny()
+    void SetSunny(Boolean boolean)
     {
         invokeParticle("RainParticles", false);
         //invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", false);
         m_WindParticles.SetActive(false);
 
+        SpawnClouds(false);
+
         SetGrayTime(false);
         m_currentMeteo = 0;
+
+        if (boolean)
+        { 
+            FindInActiveObjectByTag("SunLogo").SetActive(true);
+        }
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
@@ -145,12 +152,18 @@ public class MeteoManager : MonoBehaviour
     void SetRainy()
     {
         invokeParticle("RainParticles", true);
-        //invokeParticle("WindParticles", false);
+        invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", false);
-        m_WindParticles.SetActive(false);
+        m_WindParticles.SetActive(false); 
+        
+        SpawnClouds(true);
 
         SetGrayTime(true);
         m_currentMeteo = 1;
+
+
+        GameObject rain = FindInActiveObjectByTag("RainyLogo");
+        rain.SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
@@ -165,11 +178,16 @@ public class MeteoManager : MonoBehaviour
     {
         invokeParticle("RainParticles", false);
         m_WindParticles.SetActive(true);
-        //invokeParticle("WindParticles", true);
+        invokeParticle("WindParticles", true);
         invokeParticle("SnowParticles", false);
+
+        SpawnClouds(false);
 
         SetGrayTime(false);
         m_currentMeteo = 3;
+
+
+        FindInActiveObjectByTag("WindyLogo").SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
@@ -187,8 +205,12 @@ public class MeteoManager : MonoBehaviour
         invokeParticle("SnowParticles", true);
         m_WindParticles.SetActive(false);
 
+        SpawnClouds(true);
+
         SetGrayTime(true);
         m_currentMeteo = 2;
+
+        FindInActiveObjectByTag("SnowLogo").SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
@@ -284,6 +306,24 @@ public class MeteoManager : MonoBehaviour
             background.GetComponent<SpriteRenderer>().color = new Color(91f / 255, 199f / 255, 221f / 255);
 
             moonLight.GetComponent<Light2D>().color = new Color(53f / 255, 14f / 255, 82f / 255);
+        }
+    }
+
+    void SpawnClouds(Boolean boolean)
+    {
+        GameObject gen = GameObject.FindGameObjectWithTag("CloudGenerator");
+        if (gen == null)
+        {
+            gen = FindInActiveObjectByTag("CloudGenerator");
+        }
+
+        if (boolean)
+        {
+            gen.SetActive(true);
+        }
+        else
+        { 
+            gen.SetActive(false);
         }
     }
 }
