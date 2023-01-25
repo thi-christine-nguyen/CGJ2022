@@ -15,6 +15,10 @@ public class characterBehaviour : MonoBehaviour
     public LayerMask groundLayer;
     public Animator anim;
 
+    public AudioSource audio;
+    public AudioClip walk;
+    public AudioClip jump;
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -23,6 +27,10 @@ public class characterBehaviour : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             anim.SetBool("isRunning", false);
+
+            audio.clip = jump;
+            audio.volume = 0.1f;
+            audio.Play();
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -34,6 +42,10 @@ public class characterBehaviour : MonoBehaviour
         if (rb.velocity.x > 0f || rb.velocity.x < 0f)
         {
             anim.SetBool("isRunning", true);
+
+            audio.clip = walk;
+            audio.volume = 0.3f;
+            audio.Play();
         }
         else if (rb.velocity.x == 0f)
         {
@@ -52,6 +64,10 @@ public class characterBehaviour : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.2f);
             anim.SetBool("isRunning", true);
+
+            audio.clip = walk;
+            audio.volume = 0.3f;
+            audio.Play();
         }
     }
 

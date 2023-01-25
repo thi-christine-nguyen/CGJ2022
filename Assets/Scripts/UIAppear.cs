@@ -8,6 +8,9 @@ public class UIAppear : MonoBehaviour
 
     private bool isColid = false;
 
+    public AudioSource audio;
+    public AudioClip appearance;
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -15,6 +18,10 @@ public class UIAppear : MonoBehaviour
         {
             isColid = true;
         }
+
+        audio.clip = appearance;
+        audio.volume = 0.5f;
+        audio.Play();
     }
 
     private void OnTriggerExit2D(Collider2D other)
