@@ -34,46 +34,42 @@ public class MeteoManager : MonoBehaviour
             if (m_delay >= m_delayMax)
             {
                 SetRainy();
-                Debug.Log("rain");
             }
             else
             {
                 m_delay += Time.deltaTime;
             }
         }
-        else if (m_timeManager.GetHour() == 5 && m_timeManager.GetMinutes() == 43 && !isSnowy())
+        else if (m_timeManager.GetHour() == 0 && m_timeManager.GetMinutes() == 7 && !isSnowy())
         {
             m_delay += Time.deltaTime;
             if (m_delay >= m_delayMax)
             {
                 SetSnowy();
-                Debug.Log("snow");
             }
             else
             {
                 m_delay += Time.deltaTime;
             }
         }
-        else if (m_timeManager.GetHour() == 11 && m_timeManager.GetMinutes() == 27 && !isSunny())
+        else if (m_timeManager.GetHour() == 11 && m_timeManager.GetMinutes() == 38 && !isSunny())
         {
             m_delay += Time.deltaTime;
             if (m_delay >= m_delayMax)
             {
                 SetSunny();
-                Debug.Log("sun");
             }
             else
             {
                 m_delay += Time.deltaTime;
             }
         }
-        else if (m_timeManager.GetHour() == 23 && m_timeManager.GetMinutes() == 7 && !isWindy())
+        else if (m_timeManager.GetHour() == 1 && m_timeManager.GetMinutes() == 12 && !isWindy())
         {
             m_delay += Time.deltaTime;
             if (m_delay >= m_delayMax)
             {
                 SetWindy();
-                Debug.Log("wind");
             }
             else
             {
@@ -135,6 +131,14 @@ public class MeteoManager : MonoBehaviour
 
         SetGrayTime(false);
         m_currentMeteo = 0;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
+        {
+            foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
+            {
+                box.isTrigger = true;
+            }
+        }
     }
 
     void SetRainy()
@@ -145,6 +149,14 @@ public class MeteoManager : MonoBehaviour
 
         SetGrayTime(true);
         m_currentMeteo = 1;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
+        {
+            foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
+            {//big box : 2.257206  || water hitbox : -0.09666926
+                box.isTrigger = false;
+            }
+        }
     }
 
     void SetWindy()
@@ -155,6 +167,14 @@ public class MeteoManager : MonoBehaviour
 
         SetGrayTime(false);
         m_currentMeteo = 3;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
+        {
+            foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
+            {//big box : 2.257206  || water hitbox : -0.09666926
+                box.isTrigger = false;
+            }
+        }
     }
 
     void SetSnowy()
@@ -165,6 +185,21 @@ public class MeteoManager : MonoBehaviour
 
         SetGrayTime(true);
         m_currentMeteo = 2;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
+        {
+            foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
+            {
+                if (((int)box.offset.y) == 2)
+                {
+                    box.isTrigger = true;
+                }
+                else
+                {
+                    box.isTrigger = false;
+                }
+            }
+        }
     }
 
     void invokeParticle(String tag, Boolean boolean)
