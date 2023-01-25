@@ -20,10 +20,10 @@ public class MeteoManager : MonoBehaviour
 
     void Start()
     {
+        m_timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
         m_delay = 0;
         m_currentMeteo = 0;
         SetSunny();
-        m_timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
     }
 
     void Update()
@@ -126,8 +126,9 @@ public class MeteoManager : MonoBehaviour
     void SetSunny()
     {
         invokeParticle("RainParticles", false);
-        invokeParticle("WindParticles", false);
+        //invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", false);
+        m_WindParticles.SetActive(false);
 
         SetGrayTime(false);
         m_currentMeteo = 0;
@@ -144,8 +145,9 @@ public class MeteoManager : MonoBehaviour
     void SetRainy()
     {
         invokeParticle("RainParticles", true);
-        invokeParticle("WindParticles", false);
+        //invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", false);
+        m_WindParticles.SetActive(false);
 
         SetGrayTime(true);
         m_currentMeteo = 1;
@@ -162,7 +164,8 @@ public class MeteoManager : MonoBehaviour
     void SetWindy()
     {
         invokeParticle("RainParticles", false);
-        invokeParticle("WindParticles", true);
+        m_WindParticles.SetActive(true);
+        //invokeParticle("WindParticles", true);
         invokeParticle("SnowParticles", false);
 
         SetGrayTime(false);
@@ -182,6 +185,7 @@ public class MeteoManager : MonoBehaviour
         invokeParticle("RainParticles", false);
         invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", true);
+        m_WindParticles.SetActive(false);
 
         SetGrayTime(true);
         m_currentMeteo = 2;
