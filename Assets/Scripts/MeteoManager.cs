@@ -178,6 +178,7 @@ public class MeteoManager : MonoBehaviour
     {
         invokeParticle("RainParticles", false);
         m_WindParticles.SetActive(true);
+        m_WindParticles.transform.position = new Vector3(0, 0, 0);
         invokeParticle("WindParticles", true);
         invokeParticle("SnowParticles", false);
 
@@ -187,7 +188,7 @@ public class MeteoManager : MonoBehaviour
         m_currentMeteo = 3;
 
 
-        FindInActiveObjectByTag("WindyLogo").SetActive(true);
+        FindInActiveObjectByTag("WindLogo").SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
