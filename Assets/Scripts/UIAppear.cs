@@ -6,7 +6,6 @@ public class UIAppear : MonoBehaviour
 {
     [SerializeField] private Canvas Message;
 
-    private double Yfinal = 255;
     private bool isColid = false;
 
 
