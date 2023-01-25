@@ -7,7 +7,7 @@ public class characterBehaviour : MonoBehaviour
 {
     private float horizontal;
     private float speed = 5f;
-    private float jumpingPower = 7f;
+    private float jumpingPower = 5f;
     private bool isFacingRight = false;
 
     public Rigidbody2D rb;
@@ -48,11 +48,16 @@ public class characterBehaviour : MonoBehaviour
         {
             Flip();
         }
+        else if (horizontal < 0 && rb.velocity.y > 0.5f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.2f);
+            anim.SetBool("isRunning", true);
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed * Time.fixedDeltaTime * 50, rb.velocity.y);
     }
 
     private bool IsGrounded()
@@ -71,7 +76,7 @@ public class characterBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tree")
+        if (collision.gameObject.tag == "Tree" && GameObject.FindGameObjectWithTag("MeteoManager").GetComponent<MeteoManager>().isRainy())
         {
             float valueX = collision.gameObject.transform.position.x;
             float valueY = collision.gameObject.transform.position.y;
@@ -79,4 +84,5 @@ public class characterBehaviour : MonoBehaviour
             gameObject.transform.position = new Vector3(valueX, valueY + 1, gameObject.transform.position.z);
         }
     }
+
 }
