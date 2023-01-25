@@ -71,7 +71,7 @@ public class characterBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Tree")
+        if (collision.gameObject.tag == "Tree" && GameObject.FindGameObjectWithTag("MeteoManager").GetComponent<MeteoManager>().isRainy())
         {
             float valueX = collision.gameObject.transform.position.x;
             float valueY = collision.gameObject.transform.position.y;
