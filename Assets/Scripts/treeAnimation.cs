@@ -5,7 +5,6 @@ using UnityEngine;
 public class treeAnimation : MonoBehaviour
 {
     private MeteoManager meteo;
-
     public Animator anim;
 
     // Start is called before the first frame update
