@@ -21,24 +21,24 @@ public class randomCreation : MonoBehaviour
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-            var position1 = new Vector3(Random.Range(player.transform.position.x-10, player.transform.position.x + 10), Random.Range(player.transform.position.y + 2, player.transform.position.x + 10), 0);
+            var position1 = new Vector3(player.transform.position.x+3, player.transform.position.y + 3, 0);
             prefab1 = Instantiate(prefab, position1, Quaternion.identity);
             prefab1.transform.parent = gameObject.transform;
 
-        var position2 = new Vector3(Random.Range(player.transform.position.x - 10, player.transform.position.x + 10), Random.Range(player.transform.position.y + 2, player.transform.position.x + 10), 0);
-            prefab2 = Instantiate(prefab, position2, Quaternion.identity);
+        var position2 = new Vector3(player.transform.position.x -6, player.transform.position.y + 4, 0);
+        prefab2 = Instantiate(prefab, position2, Quaternion.identity);
         prefab2.transform.parent = gameObject.transform;
 
-        var position3 = new Vector3(Random.Range(player.transform.position.x - 10, player.transform.position.x + 10), Random.Range(player.transform.position.y + 2, player.transform.position.x + 10), 0);
-            prefab3 = Instantiate(prefab, position3, Quaternion.identity);
+        var position3 = new Vector3(player.transform.position.x + 1, player.transform.position.y + 5, 0);
+        prefab3 = Instantiate(prefab, position3, Quaternion.identity);
         prefab3.transform.parent = gameObject.transform;
 
-        var position4 = new Vector3(Random.Range(player.transform.position.x - 10, player.transform.position.x + 10), Random.Range(player.transform.position.y + 2, player.transform.position.x + 10), 0);
-            prefab4 = Instantiate(prefab, position4, Quaternion.identity);
+        var position4 = new Vector3(player.transform.position.x -4, player.transform.position.y + 3, 0);
+        prefab4 = Instantiate(prefab, position4, Quaternion.identity);
         prefab4.transform.parent = gameObject.transform;
 
-        var position5 = new Vector3(Random.Range(player.transform.position.x - 10, player.transform.position.x + 10), Random.Range(player.transform.position.y + 2, player.transform.position.x + 10), 0);
-            prefab5 = Instantiate(prefab, position5, Quaternion.identity);
+        var position5 = new Vector3(player.transform.position.x +5, player.transform.position.y + 4, 0);
+        prefab5 = Instantiate(prefab, position5, Quaternion.identity);
         prefab5.transform.parent = gameObject.transform;
 
     }
