@@ -7,7 +7,7 @@ public class MenuButton : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("alexis");
+        SceneManager.LoadScene("Game");
     }
 
     public void Quit()
