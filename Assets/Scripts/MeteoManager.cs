@@ -142,6 +142,7 @@ public class MeteoManager : MonoBehaviour
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
+            obj.GetComponent<Animator>().SetBool("frozen", false);
             foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
             {
                 box.isTrigger = true;
@@ -167,6 +168,7 @@ public class MeteoManager : MonoBehaviour
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
+            obj.GetComponent<Animator>().SetBool("frozen", false);
             foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
             {//big box : 2.257206  || water hitbox : -0.09666926
                 box.isTrigger = false;
@@ -178,6 +180,7 @@ public class MeteoManager : MonoBehaviour
     {
         invokeParticle("RainParticles", false);
         m_WindParticles.SetActive(true);
+        m_WindParticles.transform.position = new Vector3(0, 0, 0);
         invokeParticle("WindParticles", true);
         invokeParticle("SnowParticles", false);
 
@@ -187,10 +190,11 @@ public class MeteoManager : MonoBehaviour
         m_currentMeteo = 3;
 
 
-        FindInActiveObjectByTag("WindyLogo").SetActive(true);
+        FindInActiveObjectByTag("WindLogo").SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
+            obj.GetComponent<Animator>().SetBool("frozen", false);
             foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
             {//big box : 2.257206  || water hitbox : -0.09666926
                 box.isTrigger = false;
@@ -214,6 +218,7 @@ public class MeteoManager : MonoBehaviour
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
+            obj.GetComponent<Animator>().SetBool("frozen", true);
             foreach (BoxCollider2D box in obj.GetComponents<BoxCollider2D>())
             {
                 if (((int)box.offset.y) == 2)
@@ -226,7 +231,7 @@ public class MeteoManager : MonoBehaviour
                 }
             }
         }
-    }
+        }
 
     void invokeParticle(String tag, Boolean boolean)
     {
