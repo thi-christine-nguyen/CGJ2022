@@ -21,8 +21,6 @@ public class SceneMusic : MonoBehaviour
     {
         meteo = GameObject.FindGameObjectWithTag("MeteoManager").GetComponent<MeteoManager>();
 
-        /*audio.loop = true;
-        audio.Play();*/
 
     }
 
@@ -33,6 +31,7 @@ public class SceneMusic : MonoBehaviour
         {
             audio.clip = clipSun;
             audio.loop = true;
+            audio.volume = 0.9f;
             audio.Play();
             isMusicSunActive = true;
 
@@ -45,6 +44,7 @@ public class SceneMusic : MonoBehaviour
         {
             audio.clip = clipRain;
             audio.loop = true;
+            audio.volume = 0.3f;
             audio.Play();
             isMusicRainActive = true;
 
@@ -57,6 +57,7 @@ public class SceneMusic : MonoBehaviour
         {
             audio.clip = clipNeige;
             audio.loop = true;
+            audio.volume = 0.3f;
             audio.Play();
             isMusicNeigeActive = true;
 
@@ -69,6 +70,7 @@ public class SceneMusic : MonoBehaviour
         {
             audio.clip = clipWind;
             audio.loop = true;
+            audio.volume = 0.3f;
             audio.Play();
             isMusicWindActive = true;
 
