@@ -52,7 +52,7 @@ public class characterBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = new Vector2(horizontal * speed * Time.fixedDeltaTime * 50, rb.velocity.y);
     }
 
     private bool IsGrounded()
@@ -79,4 +79,5 @@ public class characterBehaviour : MonoBehaviour
             gameObject.transform.position = new Vector3(valueX, valueY + 1, gameObject.transform.position.z);
         }
     }
+
 }
