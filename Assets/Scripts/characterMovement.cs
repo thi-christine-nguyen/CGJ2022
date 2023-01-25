@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class characterBehaviour : MonoBehaviour
@@ -77,7 +78,5 @@ public class characterBehaviour : MonoBehaviour
 
             gameObject.transform.position = new Vector3(valueX, valueY + 1, gameObject.transform.position.z);
         }
-
-
     }
 }
