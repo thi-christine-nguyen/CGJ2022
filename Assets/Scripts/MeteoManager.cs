@@ -130,6 +130,8 @@ public class MeteoManager : MonoBehaviour
         invokeParticle("SnowParticles", false);
         m_WindParticles.SetActive(false);
 
+        SpawnClouds(false);
+
         SetGrayTime(false);
         m_currentMeteo = 0;
 
@@ -152,13 +154,16 @@ public class MeteoManager : MonoBehaviour
         invokeParticle("RainParticles", true);
         invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", false);
-        m_WindParticles.SetActive(false);
+        m_WindParticles.SetActive(false); 
+        
+        SpawnClouds(true);
 
         SetGrayTime(true);
         m_currentMeteo = 1;
 
 
-        FindInActiveObjectByTag("RainyLogo").SetActive(true);
+        GameObject rain = FindInActiveObjectByTag("RainyLogo");
+        rain.SetActive(true);
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("water"))
         {
@@ -175,6 +180,8 @@ public class MeteoManager : MonoBehaviour
         m_WindParticles.SetActive(true);
         invokeParticle("WindParticles", true);
         invokeParticle("SnowParticles", false);
+
+        SpawnClouds(false);
 
         SetGrayTime(false);
         m_currentMeteo = 3;
@@ -197,6 +204,8 @@ public class MeteoManager : MonoBehaviour
         invokeParticle("WindParticles", false);
         invokeParticle("SnowParticles", true);
         m_WindParticles.SetActive(false);
+
+        SpawnClouds(true);
 
         SetGrayTime(true);
         m_currentMeteo = 2;
@@ -297,6 +306,24 @@ public class MeteoManager : MonoBehaviour
             background.GetComponent<SpriteRenderer>().color = new Color(91f / 255, 199f / 255, 221f / 255);
 
             moonLight.GetComponent<Light2D>().color = new Color(53f / 255, 14f / 255, 82f / 255);
+        }
+    }
+
+    void SpawnClouds(Boolean boolean)
+    {
+        GameObject gen = GameObject.FindGameObjectWithTag("CloudGenerator");
+        if (gen == null)
+        {
+            gen = FindInActiveObjectByTag("CloudGenerator");
+        }
+
+        if (boolean)
+        {
+            gen.SetActive(true);
+        }
+        else
+        { 
+            gen.SetActive(false);
         }
     }
 }

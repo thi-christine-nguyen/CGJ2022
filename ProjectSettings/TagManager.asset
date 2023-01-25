@@ -21,6 +21,7 @@ TagManager:
   - SunLogo
   - SnowLogo
   - WindLogo
+  - CloudGenerator
   layers:
   - Default
   - TransparentFX

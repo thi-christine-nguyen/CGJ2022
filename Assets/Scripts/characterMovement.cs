@@ -7,7 +7,7 @@ public class characterBehaviour : MonoBehaviour
 {
     private float horizontal;
     private float speed = 5f;
-    private float jumpingPower = 7f;
+    private float jumpingPower = 5f;
     private bool isFacingRight = false;
 
     public Rigidbody2D rb;
@@ -47,6 +47,11 @@ public class characterBehaviour : MonoBehaviour
         else if (horizontal < 0 && isFacingRight)
         {
             Flip();
+        }
+        else if (horizontal < 0 && rb.velocity.y > 0.5f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.2f);
+            anim.SetBool("isRunning", true);
         }
     }
 
